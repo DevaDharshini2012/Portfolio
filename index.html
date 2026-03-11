@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deva Dharshini K | Portfolio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Scripts: React, ReactDOM, Babel, Framer Motion (via CDN) -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useMemo } = React;
+        const { motion, AnimatePresence } = window.Motion; // Framer Motion uses window.Motion in UMD
+
+        // Custom Icon Component using Lucide
+        const Icon = ({ name, className, size = 20 }) => {
+            useEffect(() => {
+                if (window.lucide) {
+                    window.lucide.createIcons();
+                }
+            }, [name]);
+            return <i data-lucide={name} className={className} style={{ width: size, height: size, display: 'inline-block' }}></i>;
+        };
+
+        const Navbar = () => {
+            const [scrolled, setScrolled] = useState(false);
+            useEffect(() => {
+                const handleScroll = () => setScrolled(window.scrollY > 50);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            return (
+                <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+                    <div className="nav-content">
+                        <div className="logo">Deva Dharshini.<span>K</span></div>
+                        <div className="nav-links">
+                            <a href="#home">Home</a>
+                            <a href="#about">About</a>
+                            <a href="#skills">Skills</a>
+                            <a href="#projects">Projects</a>
+                            <a href="#contact">Contact</a>
+                        </div>
+                    </div>
+                </nav>
+            );
+        };
+
+        const Hero = () => (
+            <section id="home" className="hero">
+                <div className="hero-content">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                    >
+                        Hello, I'm
+                    </motion.h2>
+                    <motion.h1
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="gradient-text profile-name"
+                    >
+                        Deva Dharshini K
+                    </motion.h1>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.4 }}
+                    >
+                        B. Tech Information Technology Student & Aspiring Full-Stack Developer
+                    </motion.p>
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.8, delay: 0.6 }}
+                        className="hero-cta"
+                    >
+                        <a href="#projects" className="btn btn-primary">View My Work</a>
+                        <a href="assets/resume.pdf" target="_blank" className="btn btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <Icon name="file-text" size={18} />
+                            Resume
+                        </a>
+                    </motion.div>
+                </div>
+                <motion.div
+                    className="hero-image-container"
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1, delay: 0.5 }}
+                >
+                    <div className="profile-image-wrapper">
+                        <img src="assets/profile.png?v=1.1" alt="Deva Dharshini K" className="profile-img" />
+                    </div>
+                    <div className="hero-visual">
+                        <div className="blob"></div>
+                    </div>
+                </motion.div>
+            </section>
+        );
+
+        const About = () => (
+            <section id="about" className="section">
+                <div className="container">
+                    <h2 className="section-title">About Me</h2>
+                    <div className="about-grid">
+                        <div className="about-visual-bg">
+                            <div className="about-blob"></div>
+                        </div>
+                        <div className="about-text">
+                            <p className="about-bio">
+                                I am Deva Dharshini, a final-year Information Technology student at Ramco Institute of Technology with a <span className="highlight">strong passion for software development and full-stack web development</span>. I have solid knowledge of Java programming along with experience in HTML, CSS, JavaScript, React.js, Node.js, Express.js, and MongoDB.
+                            </p>
+                            <br />
+                            <p className="about-bio">
+                                I enjoy building scalable and user-friendly applications and have developed projects such as a To-Do List Application, Online Quiz App, Library Management System, and a React-based Shopping Cart. I am also actively improving my problem-solving and programming skills.
+                            </p>
+                            <br />
+                            <p className="about-bio">
+                                I am eager to start my career as a Java Developer or Full-Stack Developer, where I can apply my technical skills, contribute to real-world projects, and continue learning new technologies.
+                            </p>
+                            <motion.div
+                                className="edu-box glass"
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8 }}
+                                whileHover={{ scale: 1.02 }}
+                            >
+                                <h3>Education</h3>
+                                <div className="edu-item">
+                                    <div className="edu-year">2022 — 2026</div>
+                                    <div className="edu-info">
+                                        <h4>B. Tech in Information Technology</h4>
+                                        <p>Ramco Institute of Technology, Rajapalayam</p>
+                                        <span className="badge">CGPA: 7.91</span>
+                                    </div>
+                                </div>
+
+                            </motion.div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        );
+
+        const Skills = () => {
+            const skillGroups = [
+                { category: 'Programming', skills: ['Java'] },
+                { category: 'Web', skills: ['HTML', 'CSS', 'JavaScript', 'React.js'] },
+                { category: 'Database', skills: ['MongoDB', 'SQL'] },
+                { category: 'Concepts', skills: ['OOP', 'Algorithms'] }
+            ];
+
+            return (
+                <section id="skills" className="section alt-bg">
+                    <div className="container">
+                        <h2 className="section-title">Technical Skills</h2>
+                        <div className="skills-grid">
+                            {skillGroups.map((group, i) => (
+                                <motion.div
+                                    key={i}
+                                    className="skill-card glass"
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.6, delay: i * 0.1 }}
+                                    whileHover={{ scale: 1.03 }}
+                                >
+                                    <h3>{group.category}</h3>
+                                    <div className="skill-tags">
+                                        {group.skills.map(skill => (
+                                            <span key={skill} className="tag">{skill}</span>
+                                        ))}
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Projects = () => {
+            const projects = [
+                {
+                    title: "Online Quiz Application",
+                    subtitle: "Java & React Development",
+                    tech: ["React", "Node.js", "MongoDB", "Express", "JWT"],
+                    desc: "Developed a real-time quiz platform with user authentication, category-based questions, and instant result generation.",
+                    link: "https://github.com/DevaDharshini2012/Online-Quiz-Application",
+                    demo: "#"
+                },
+                {
+                    title: "Course Recommendation System",
+                    subtitle: "Machine Learning & XAI",
+                    tech: ["Python", "Scikit-Learn", "NLTK", "Flask", "Explainable AI"],
+                    desc: "Built a recommendation engine using collaborative filtering and integrated Explainable AI (LIME/SHAP) to provide transparent rationales for course suggestions.",
+                    link: "https://github.com/DevaDharshini2012/course-recommendation-system",
+                    demo: "#"
+                },
+
+            ];
+
+            return (
+                <section id="projects" className="section">
+                    <div className="container">
+                        <h2 className="section-title">Featured Projects</h2>
+                        <div className="projects-grid">
+                            {projects.map((proj, i) => (
+                                <motion.div key={i} className="project-card glass">
+                                    <div className="project-info">
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                                            <span className="project-subtitle">{proj.subtitle}</span>
+                                            <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                                                {proj.link && (
+                                                    <a href={proj.link} target="_blank" className="project-link" style={{
+                                                        color: 'var(--primary)',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: '6px',
+                                                        fontSize: '0.9rem',
+                                                        textDecoration: 'none',
+                                                        fontWeight: '500'
+                                                    }}>
+                                                        <Icon name="github" size={18} />
+                                                        <span>GitHub</span>
+                                                    </a>
+                                                )}
+                                                {proj.demo && (
+                                                    <a href={proj.demo} target="_blank" className="project-link" style={{
+                                                        color: 'var(--secondary)',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: '6px',
+                                                        fontSize: '0.9rem',
+                                                        textDecoration: 'none',
+                                                        fontWeight: '500'
+                                                    }}>
+
+                                                    </a>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <h3>{proj.title}</h3>
+                                        <p>{proj.desc}</p>
+                                        <div className="project-tech">
+                                            {proj.tech.map(t => <span key={t} className="tech-tag">{t}</span>)}
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        const Contact = () => (
+            <section id="contact" className="section contact">
+                <div className="container">
+                    <h2 className="section-title">Let's Connect</h2>
+                    <div className="contact-grid">
+                        <a href="mailto:kdevadharshini93@gmail.com" className="contact-item">
+                            <Icon name="mail" />
+                            <span>kdevadharshini93@gmail.com</span>
+                        </a>
+                        <a href="tel:7448915061" className="contact-item">
+                            <Icon name="phone" />
+                            <span>+91 7448915061</span>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" className="contact-item">
+                            <Icon name="linkedin" />
+                            <span>LinkedIn Profile</span>
+                        </a>
+                        <a href="https://github.com" target="_blank" className="contact-item">
+                            <Icon name="github" />
+                            <span>GitHub Profile</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        );
+
+        const App = () => (
+            <div className="app-wrapper">
+                <Navbar />
+                <main>
+                    <Hero />
+                    <About />
+                    <Skills />
+                    <Projects />
+                    <Contact />
+                </main>
+                <footer className="footer">
+                    <p>&copy; 2025 Deva Dharshini K. All rights reserved.</p>
+                </footer>
+            </div>
+        );
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+
+</html>
