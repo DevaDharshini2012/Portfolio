@@ -274,7 +274,7 @@ body {
 .about-text {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     max-width: 900px;
     width: 100%;
     margin: 0 auto;
